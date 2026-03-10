@@ -24,6 +24,6 @@ public interface LinearListInterface {
     
     public void printList();
     
-    public boolean searchKey(Object headNode, int key);
+    public boolean searchKey(Object headNode, Object key);
     
 }
