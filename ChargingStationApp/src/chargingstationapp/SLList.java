@@ -38,7 +38,10 @@ public class SLList implements LinearListInterface{
     @Override
     public void add(int iPosition, Object theElement) {
         SLLStationNode newNode = new SLLStationNode(theElement, null);
-        if(iPosition == 0) {
+        if(iPosition == 1) {
+            if(head.getNext() != null) {
+                newNode.setNext(head);
+            }
             this.head = newNode;
         }
         else {
@@ -46,13 +49,20 @@ public class SLList implements LinearListInterface{
             newNode.setNext(currNode.getNext());
             currNode.setNext(newNode);
         }
+        iSize = iSize + 1;
     }
     
     @Override
     public void add(Object theElement) {
         SLLStationNode newNode = new SLLStationNode(theElement, null);
-        setCurrent(iSize);
-        currNode.setNext(newNode);
+        if(head == null) {
+            head = newNode;
+        }
+        else {
+            setCurrent(iSize);
+            currNode.setNext(newNode);
+        }
+        iSize = iSize + 1;
     }
     
     @Override
@@ -66,7 +76,7 @@ public class SLList implements LinearListInterface{
         setCurrent(iPosition);
         
         if(currNode == head) {
-            head = currNode;
+            head = currNode.getNext();
         }
         else if(currNode.getNext() == null) {
             prevNode.setNext(null);
@@ -74,13 +84,14 @@ public class SLList implements LinearListInterface{
         else if (currNode.getNext() != null) {
             prevNode.setNext(currNode.getNext());
         }
+        iSize = iSize - 1;
     }
     
     @Override
     public void printList() {
         currNode = head;
         
-        while(currNode.getNext() != null) {
+        while(currNode != null) {
             System.out.println(currNode.toString() + "\n");
             currNode = currNode.getNext();
         }
@@ -91,17 +102,19 @@ public class SLList implements LinearListInterface{
         currNode = head;
         boolean found = false;
         
-        for(int i = 0; i < iSize; i++) {
+        for(int i = 1; i < iSize; i++) {
             if(currNode.getElement() == key) {
                 found = true;
             }
+            currNode = currNode.getNext();
         }
         return found;
     }
     
     private void setCurrent(int iPosition) {
         this.currNode = head;
-        for(int i = 0; i < iPosition; i++) {
+
+        for(int i = 1; i < iPosition; i++) {
             prevNode = currNode;
             currNode = currNode.getNext(); 
         } 

@@ -53,6 +53,45 @@ public class ChargingStationApp {
         System.out.println(pq.size());
 
         */
+        
+        
+        /*
+        Testing of the Singly Linked List
+        
+        
+        SLList sl = new SLList();
+       
+        
+        sl.add(12);
+        sl.add(122);
+        sl.add(3);
+        sl.add(43);
+        sl.add(90);
+        sl.add(2);
+        
+        
+        sl.printList();
+        
+        System.out.println("*******");
+        
+        sl.add(3, 4);
+        sl.add(1, 5);
+        
+        sl.printList();
+        
+        System.out.println("*******");
+        
+        System.out.println(sl.get(2));
+        
+        System.out.println("*******");
+        
+        sl.remove(1);
+        sl.remove(3);
+        
+        sl.printList();
+        
+        System.out.println(sl.searchKey(null, 43));
+        */
     }
     
 }
