@@ -13,13 +13,13 @@ import java.util.List;
  */
 public class BTNode {
     
-    private int iElement;
+    private String sElement;
     private BTNode leftChild;
     private BTNode rightChild;
     private ArrayList<Integer> stations = new ArrayList<>();
     
-    public BTNode(int iInValue) {
-        this.iElement = iInValue;
+    public BTNode(String inValue) {
+        this.sElement = inValue;
     }
     
     public boolean isLeaf() {
@@ -30,8 +30,8 @@ public class BTNode {
         return leaf;
     }
     
-    public int getiElement() {
-        return iElement;
+    public String getElement() {
+        return sElement;
     }
     
     public void setLeft(BTNode inNode) {
@@ -70,7 +70,7 @@ public class BTNode {
         stations.add(id);
     }
     
-    public List<Integer> setStation() {
+    public List<Integer> getStation() {
         return stations;
     }
 }
