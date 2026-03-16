@@ -35,6 +35,7 @@ public class BinaryTree {
         if(theRoot == null) {
            theRoot = newNode; 
         }
+        // Using recursion to find the correct insert location
         else if(newNode.getElement().compareTo(startNode.getElement()) < 0) {
             if(startNode.getLeft() ==  null) {
                 startNode.setLeft(newNode);
@@ -112,6 +113,7 @@ public class BinaryTree {
         }
     }
     
+    // Add the stations in the ArrayList in the BinaryTree nodes
     public void setStations(BTNode startNode,String location, int stationId) {
         if(startNode.getElement().equals(location)) {
             startNode.setStation(stationId);

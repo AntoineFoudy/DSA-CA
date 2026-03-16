@@ -35,8 +35,11 @@ public class SLList implements LinearListInterface{
         return iSize;
     }
     
+    // Add methods use overloading to decided which add method to run
+    
     @Override
     public void add(int iPosition, Object theElement) {
+        // Create a SLL node, holds the station id ( of type int ) and defaults to a null pointer
         SLLStationNode newNode = new SLLStationNode(theElement, null);
         if(iPosition == 1) {
             if(head.getNext() != null) {
@@ -54,6 +57,7 @@ public class SLList implements LinearListInterface{
     
     @Override
     public void add(Object theElement) {
+        // Create a SLL node, holds the station id ( of type int ) and defaults to a null pointer
         SLLStationNode newNode = new SLLStationNode(theElement, null);
         if(head == null) {
             head = newNode;
@@ -71,10 +75,12 @@ public class SLList implements LinearListInterface{
         return currNode;
     }
     
+    // Removes the Node at a spesific position 
     @Override
     public void remove(int iPosition) {
         setCurrent(iPosition);
         
+        // Changes the pointer of the previous node to the next node in relation to the node that has been removed
         if(currNode == head) {
             head = currNode.getNext();
         }
@@ -98,16 +104,29 @@ public class SLList implements LinearListInterface{
     }
     
     @Override
-    public boolean searchKey(Object headNode, Object key) {
+    public boolean searchKey(Object key) {
         currNode = head;
         boolean found = false;
         
-        for(int i = 1; i < iSize; i++) {
-            if(currNode.getElement() == key) {
+        /*
+            Rewrote the find method because of past bugs
+            Originaly I forgot to increase the size every time I added a node
+            And I had i as = 1, so it was not checking every element in the SLL
+            Now the method doesn't rely on the SLL  size or me having the correct number
+        */
+        while(currNode != null && !found) {
+            if(currNode.getElement().equals(key)) {
                 found = true;
             }
             currNode = currNode.getNext();
         }
+        
+//        for(int i = 0; i < iSize; i++) {
+//            if(currNode.getElement() == key) {
+//                found = true;
+//            }
+//            currNode = currNode.getNext();
+//        }
         return found;
     }
     

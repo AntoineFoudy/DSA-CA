@@ -31,7 +31,7 @@ public class PriorityQueue implements PQInterface {
     @Override
     public void enqueue(int getPriority, Object vehicle) {
         int index;
-        
+        // Create the newElement using the priority of the Vehicle, and the Vehicle
         PQElement newElement = new PQElement(getPriority, (Vehicle) vehicle);
         
         index = findInsertPosition(getPriority);

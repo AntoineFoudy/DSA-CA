@@ -12,6 +12,8 @@ import java.util.List;
  */
 public class GUI extends javax.swing.JFrame {
     
+    // Declaring the needed classes and nodes
+    
     private SLList theList;
     private BinaryTree theBTree;
     private PriorityQueue theQueue;
@@ -50,10 +52,12 @@ public class GUI extends javax.swing.JFrame {
     public GUI() {
         initComponents();
         
+        // Instantiating the ADTs
         this.theList = new SLList();
         this.theBTree = new BinaryTree();
         this.theQueue = new PriorityQueue();
         
+        // Adding the area codes at program start
         this.theBTree.insertNode(null, d01);
         this.theBTree.insertNode(d01, d02);
         this.theBTree.insertNode(d01, d03);
@@ -229,6 +233,7 @@ public class GUI extends javax.swing.JFrame {
         battery_txtField.setText("");
         vehicleType_txtField.setText("");
     }
+    
     /*
         Check if Station is already in system with the SLL
         If it is not added, add to the SLL and Binary Tree
@@ -236,7 +241,9 @@ public class GUI extends javax.swing.JFrame {
     private void add_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_bttnActionPerformed
         int newStationElement = Integer.parseInt(station_txtField.getText());
         
-        if(!this.theList.searchKey(null, newStationElement)) {
+        // Check if the station is already added to the system
+        if(!this.theList.searchKey(newStationElement)) {
+            // If it is not then add it to the SLL and the correct BinaryTree Node
             this.theList.add(newStationElement);
             
             String location = (String)location_comboBox.getSelectedItem();
@@ -256,8 +263,10 @@ public class GUI extends javax.swing.JFrame {
     private void search_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_bttnActionPerformed
         BTNode resultNode = theBTree.search((String)location_comboBox.getSelectedItem(), d01);
         
+        // Gather all the result in the resultList variable
         List<Integer> resultList = resultNode.getStation();
         
+        // Display the results if the size is greater or equal to 1
         if(resultList.size() >= 1) {
             outPuts_txtArea.append("\n The Stations in " + (String)location_comboBox.getSelectedItem() + " are: ");
             for(Integer i : resultList) {
@@ -272,7 +281,7 @@ public class GUI extends javax.swing.JFrame {
     
     // Join the priority queue
     private void join_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_join_bttnActionPerformed
-
+        // Get the correct Vehicle Type and store it into the variable newVehicle which is type Vehicle ( the parent class )
         Vehicle newVehicle = electricOrHybrid(vehicleType_txtField.getText());
         theQueue.enqueue(newVehicle.getPriority(), newVehicle);
         
@@ -293,12 +302,11 @@ public class GUI extends javax.swing.JFrame {
 
     // Remove the first Vehicle in the queue
     private void deleteFirst_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteFirst_bttnActionPerformed
-        // TODO add your handling code here:
         theQueue.dequeue();
         outPuts_txtArea.append("\n The vehicle has been removed");
     }//GEN-LAST:event_deleteFirst_bttnActionPerformed
     
-    // Implement the correct Vehicle Child to get the correct priority
+    // Implement the correct Vehicle Child class to get the correct priority
     private Vehicle electricOrHybrid(String type) {
         if("EV".equals(type)) {
             newEV = new ElectricVehicle(name_txtField.getText(), Integer.parseInt(battery_txtField.getText()));
