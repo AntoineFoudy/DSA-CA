@@ -239,21 +239,26 @@ public class GUI extends javax.swing.JFrame {
         If it is not added, add to the SLL and Binary Tree
     */
     private void add_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_bttnActionPerformed
-        int newStationElement = Integer.parseInt(station_txtField.getText());
-        
-        // Check if the station is already added to the system
-        if(!this.theList.searchKey(newStationElement)) {
-            // If it is not then add it to the SLL and the correct BinaryTree Node
-            this.theList.add(newStationElement);
-            
-            String location = (String)location_comboBox.getSelectedItem();
-            this.theBTree.setStations(d01, location, newStationElement);
-            this.outPuts_txtArea.append(" \n Station " + newStationElement + " has been added to " + location);
+        // Enforcing correct input type
+        try {       
+            int newStationElement = Integer.parseInt(station_txtField.getText());
+
+            // Check if the station is already added to the system
+            if(!this.theList.searchKey(newStationElement)) {
+                // If it is not then add it to the SLL and the correct BinaryTree Node
+                this.theList.add(newStationElement);
+
+                String location = (String)location_comboBox.getSelectedItem();
+                this.theBTree.setStations(d01, location, newStationElement);
+                this.outPuts_txtArea.append(" \n Station " + newStationElement + " has been added to " + location);
+            }
+            else {
+                this.outPuts_txtArea.append(" \n This Station has already been added");
+            }
         }
-        else {
-            this.outPuts_txtArea.append(" \n This Station has already been added");
+        catch (NumberFormatException e) {
+            outPuts_txtArea.append("\n Please make sure to only input a valid station id. Example: 3");
         }
-        
         clear();
     }//GEN-LAST:event_add_bttnActionPerformed
 
@@ -282,11 +287,15 @@ public class GUI extends javax.swing.JFrame {
     // Join the priority queue
     private void join_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_join_bttnActionPerformed
         // Get the correct Vehicle Type and store it into the variable newVehicle which is type Vehicle ( the parent class )
-        Vehicle newVehicle = electricOrHybrid(vehicleType_txtField.getText());
-        theQueue.enqueue(newVehicle.getPriority(), newVehicle);
+        try {
+            Vehicle newVehicle = electricOrHybrid(vehicleType_txtField.getText());
+            theQueue.enqueue(newVehicle.getPriority(), newVehicle);
         
-        outPuts_txtArea.append("\n Vehicle has been added to the queue");
-        
+            outPuts_txtArea.append("\n Vehicle has been added to the queue");
+        }
+        catch (Exception e) {
+            outPuts_txtArea.append("\n Please make sure to correctly input the info. Example: Name = Antoine, Battery = 30, Vehicle Type = EV");
+        }
         clear();
     }//GEN-LAST:event_join_bttnActionPerformed
 
@@ -312,9 +321,13 @@ public class GUI extends javax.swing.JFrame {
             newEV = new ElectricVehicle(name_txtField.getText(), Integer.parseInt(battery_txtField.getText()));
             return newEV;
         }
-        else {
+        else if("HV".equals(type)) {
             newHV = new HybridVehicle(name_txtField.getText(), Integer.parseInt(battery_txtField.getText()));
             return newHV;
+        }
+        else {
+            outPuts_txtArea.append("\n Incorrect Vehicle type");
+            return null;
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
