@@ -92,6 +92,46 @@ public class ChargingStationApp {
         
         System.out.println(sl.searchKey(null, 43));
         */
+        
+        /*
+        Testing of the Binary Tree
+        
+        
+        BinaryTree bt = new BinaryTree();
+        
+        BTNode l1 = new BTNode("Dublin");
+        BTNode l2 = new BTNode("Clare");
+        BTNode l3 = new BTNode("Carlow");
+        BTNode l4 = new BTNode("Banana");
+        
+        bt.insertNode(null, l1);
+        bt.insertNode(l1, l2);
+        bt.insertNode(l1, l3);
+        bt.insertNode(l1, l4);
+        
+        bt.inOrderTraversal(l1);
+        System.out.println("*****");
+        bt.preOrderTraversal(l1);
+        System.out.println("*****");
+        bt.postOrderTraversal(l1);
+        System.out.println("*****");
+        
+        
+        System.out.println(bt.search("Carlow", l1));
+        
+        System.out.println(bt.countNodes(l1));
+        
+        System.out.println(bt.height(l1));
+        
+        bt.setStations(l1, "Clare", 2);
+        bt.setStations(l1, "Clare", 6);
+        
+        
+        System.out.println(bt.getStations(l1, "Clare"));
+        
+        System.out.println(bt.isEmpty());
+
+        */
     }
     
 }
