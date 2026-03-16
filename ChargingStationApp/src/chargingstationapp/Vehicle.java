@@ -32,6 +32,6 @@ public class Vehicle {
     
     @Override
     public String toString() {
-        return "Name: " + name + " Battery Percent: " + batteryPercent;
+        return "Name: " + name + ", Battery Percent: " + batteryPercent;
     }
 }

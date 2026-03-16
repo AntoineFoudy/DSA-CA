@@ -4,6 +4,8 @@
  */
 package chargingstationapp;
 
+import java.util.List;
+
 /**
  *
  * @author afoud
@@ -12,6 +14,10 @@ public class GUI extends javax.swing.JFrame {
     
     private SLList theList;
     private BinaryTree theBTree;
+    private PriorityQueue theQueue;
+    
+    private ElectricVehicle newEV;
+    private HybridVehicle newHV;
     
     private BTNode d01 = new BTNode("D01");
     private BTNode d02 = new BTNode("D02");
@@ -46,6 +52,7 @@ public class GUI extends javax.swing.JFrame {
         
         this.theList = new SLList();
         this.theBTree = new BinaryTree();
+        this.theQueue = new PriorityQueue();
         
         this.theBTree.insertNode(null, d01);
         this.theBTree.insertNode(d01, d02);
@@ -106,12 +113,16 @@ public class GUI extends javax.swing.JFrame {
         add_bttn.addActionListener(this::add_bttnActionPerformed);
 
         search_bttn.setText("Search");
+        search_bttn.addActionListener(this::search_bttnActionPerformed);
 
         join_bttn.setText("Join");
+        join_bttn.addActionListener(this::join_bttnActionPerformed);
 
         view_bttn.setText("View");
+        view_bttn.addActionListener(this::view_bttnActionPerformed);
 
         deleteFirst_bttn.setText("Remove first in Queue");
+        deleteFirst_bttn.addActionListener(this::deleteFirst_bttnActionPerformed);
 
         outPuts_txtArea.setColumns(20);
         outPuts_txtArea.setRows(5);
@@ -239,6 +250,65 @@ public class GUI extends javax.swing.JFrame {
         clear();
     }//GEN-LAST:event_add_bttnActionPerformed
 
+    /*
+        Search for all the Stations in a spesific location
+    */
+    private void search_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_bttnActionPerformed
+        BTNode resultNode = theBTree.search((String)location_comboBox.getSelectedItem(), d01);
+        
+        List<Integer> resultList = resultNode.getStation();
+        
+        if(resultList.size() >= 1) {
+            outPuts_txtArea.append("\n The Stations in " + (String)location_comboBox.getSelectedItem() + " are: ");
+            for(Integer i : resultList) {
+                outPuts_txtArea.append(Integer.toString(i) + " ");
+            }
+        }
+        else {
+            outPuts_txtArea.append("\n There are no Stations in this location");
+        }
+        
+    }//GEN-LAST:event_search_bttnActionPerformed
+    
+    // Join the priority queue
+    private void join_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_join_bttnActionPerformed
+
+        Vehicle newVehicle = electricOrHybrid(vehicleType_txtField.getText());
+        theQueue.enqueue(newVehicle.getPriority(), newVehicle);
+        
+        outPuts_txtArea.append("\n Vehicle has been added to the queue");
+        
+        clear();
+    }//GEN-LAST:event_join_bttnActionPerformed
+
+    // View who is currently in the queue and their priority
+    private void view_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_view_bttnActionPerformed
+        if(theQueue.size() == 0) {
+            outPuts_txtArea.append("\n The Queue is Empty");
+        }
+        else {
+            outPuts_txtArea.append("\n" + theQueue.printPQueue());
+        }
+    }//GEN-LAST:event_view_bttnActionPerformed
+
+    // Remove the first Vehicle in the queue
+    private void deleteFirst_bttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteFirst_bttnActionPerformed
+        // TODO add your handling code here:
+        theQueue.dequeue();
+        outPuts_txtArea.append("\n The vehicle has been removed");
+    }//GEN-LAST:event_deleteFirst_bttnActionPerformed
+    
+    // Implement the correct Vehicle Child to get the correct priority
+    private Vehicle electricOrHybrid(String type) {
+        if("EV".equals(type)) {
+            newEV = new ElectricVehicle(name_txtField.getText(), Integer.parseInt(battery_txtField.getText()));
+            return newEV;
+        }
+        else {
+            newHV = new HybridVehicle(name_txtField.getText(), Integer.parseInt(battery_txtField.getText()));
+            return newHV;
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add_bttn;
     private javax.swing.JTextField battery_txtField;

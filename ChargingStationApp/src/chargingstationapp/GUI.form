@@ -170,6 +170,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Search"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="search_bttnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="name_txtField">
     </Component>
@@ -181,16 +184,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Join"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="join_bttnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="view_bttn">
       <Properties>
         <Property name="text" type="java.lang.String" value="View"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="view_bttnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="deleteFirst_bttn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Remove first in Queue"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteFirst_bttnActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
